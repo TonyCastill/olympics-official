@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -368,11 +370,11 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
 
 
     var countries = listOf(
-        Country("USA", 39, 41, 33, R.drawable.flag_of_mexico),
-        Country("China", 38, 32, 18, R.drawable.flag_of_mexico),
-        Country("Japan", 27, 14, 17, R.drawable.flag_of_mexico),
-        Country("UK", 22, 21, 22, R.drawable.flag_of_mexico),
-        Country("Germany", 10, 11, 16, R.drawable.flag_of_mexico)
+        Country("USA", 39, 41, 33, R.drawable.flag_of_usa),
+        Country("CHN", 38, 32, 18, R.drawable.flag_of_china),
+        Country("JPN", 27, 14, 17, R.drawable.flag_of_japan),
+        Country("UK", 22, 21, 22, R.drawable.flag_of_uk),
+        Country("MEX", 10, 11, 16, R.drawable.flag_of_mexico)
     )
     var myCountry = Country("MEX",1,2,3, R.drawable.flag_of_mexico)
 
@@ -794,7 +796,7 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                 }
             }*/
 
-            items(count = countries.size){
+            itemsIndexed(countries){ index,country ->
                 Row( // Pattern that applies to all the 10 items
                     modifier = Modifier
                         //.width(110.dp)
@@ -820,13 +822,13 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                                 verticalAlignment = Alignment.CenterVertically
                             ){
 
-                                Text(text = "1",
+                                Text(text = "${index+1}",
                                     fontSize = 20.sp,
                                     color = Color.White,
                                     modifier = Modifier.padding(0.dp,0.dp,10.dp,0.dp))
 
                                 Image(
-                                    painter = painterResource(id = R.drawable.flag_of_mexico) ,
+                                    painter = painterResource(id = country.flag) ,
                                     contentDescription = "Custom SVG Icon",
                                     modifier = Modifier
                                         .padding(0.dp, 0.dp, 10.dp, 0.dp)
@@ -835,7 +837,7 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
 
                                 )
 
-                                Text(text = myCountry.name,
+                                Text(text = country.name,
                                     color = Color.White,
                                     fontSize = 20.sp,)
                             }
@@ -852,26 +854,26 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="${myCountry.goldMedals}"
+                                    text="${country.goldMedals}"
                                 )
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="${myCountry.silverMedals}"
+                                    text="${country.silverMedals}"
                                 )
 
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="${myCountry.bronceMedals}"
+                                    text="${country.bronceMedals}"
                                 )
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="${myCountry.totalMedals()}"
+                                    text="${country.totalMedals()}"
                                 )
 
                                 val interactionSource = remember { MutableInteractionSource() }
