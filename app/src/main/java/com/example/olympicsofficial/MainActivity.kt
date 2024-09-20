@@ -52,6 +52,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.olympicsofficial.ui.theme.OlympicsOfficialTheme
+import com.example.olympicsofficial.classes.Country
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -364,6 +365,17 @@ fun Footer(){
 @Preview(showBackground = true)
 @Composable
 fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the surface
+
+
+    var countries = listOf(
+        Country("USA", 39, 41, 33, R.drawable.flag_of_mexico),
+        Country("China", 38, 32, 18, R.drawable.flag_of_mexico),
+        Country("Japan", 27, 14, 17, R.drawable.flag_of_mexico),
+        Country("UK", 22, 21, 22, R.drawable.flag_of_mexico),
+        Country("Germany", 10, 11, 16, R.drawable.flag_of_mexico)
+    )
+    var myCountry = Country("MEX",1,2,3, R.drawable.flag_of_mexico)
+
     Column( //Main column to display all
         modifier = Modifier
             .fillMaxSize()
@@ -782,7 +794,7 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                 }
             }*/
 
-            items(count = 9){
+            items(count = countries.size){
                 Row( // Pattern that applies to all the 10 items
                     modifier = Modifier
                         //.width(110.dp)
@@ -808,7 +820,7 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                                 verticalAlignment = Alignment.CenterVertically
                             ){
 
-                                Text(text = "$it",
+                                Text(text = "1",
                                     fontSize = 20.sp,
                                     color = Color.White,
                                     modifier = Modifier.padding(0.dp,0.dp,10.dp,0.dp))
@@ -823,7 +835,7 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
 
                                 )
 
-                                Text(text = "MEX",
+                                Text(text = myCountry.name,
                                     color = Color.White,
                                     fontSize = 20.sp,)
                             }
@@ -840,26 +852,26 @@ fun VerticalHorizontalScroll(){ // Main function to draw everything, inside the 
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="1"
+                                    text="${myCountry.goldMedals}"
                                 )
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="2"
+                                    text="${myCountry.silverMedals}"
                                 )
 
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="3"
+                                    text="${myCountry.bronceMedals}"
                                 )
                                 Text(
                                     modifier = Modifier
                                         .size(20.dp) // Adjust the size as needed
                                         .fillMaxWidth(0.20f),
-                                    text="6"
+                                    text="${myCountry.totalMedals()}"
                                 )
 
                                 val interactionSource = remember { MutableInteractionSource() }
